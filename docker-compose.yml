@@ -1,7 +1,5 @@
-version: '3.8'
-
 services:
-  postgres_test:
+  postgres-test:
     image: postgres:14
     container_name: postgres-test
     environment:
@@ -14,12 +12,12 @@ services:
     networks:
       - quarkus-net
 
-  quarkus_example:
+  quarkus-example:
     image: quarkus-example
     ports:
       - "8080:8080"
     depends_on:
-      - postgres_test
+      - postgres-test
     stdin_open: true
     tty: true
     networks:
