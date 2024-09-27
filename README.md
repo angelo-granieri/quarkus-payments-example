@@ -1,4 +1,5 @@
-# Quarkus DAT/CSV Serialization and Validation Service
+# quarkus-payments-example
+>  Quarkus DAT/CSV Serialization and Validation Service
 
 This project is a Quarkus-based service designed to handle the serialization and validation of DAT/CSV files. It saves
 valid records to a selected database.
