@@ -11,6 +11,8 @@ services:
     ports:
       - "5432:5432"
     restart: always
+    networks:
+      - quarkus-net
 
   quarkus_example:
     image: quarkus-example
@@ -20,3 +22,9 @@ services:
       - postgres_test
     stdin_open: true
     tty: true
+    networks:
+      - quarkus-net
+
+networks:
+  quarkus-net:
+    driver: bridge
