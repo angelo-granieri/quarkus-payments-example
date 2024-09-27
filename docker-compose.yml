@@ -9,20 +9,31 @@ services:
     ports:
       - "5432:5432"
     restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - quarkus-net
 
-  quarkus-example:
+  quarkus-svc:
     image: quarkus-example
     ports:
       - "8080:8080"
+    restart: always
     depends_on:
-      - postgres-test
+      postgres-test:
+        condition: service_healthy
     stdin_open: true
     tty: true
+    links:
+      - "postgres-test:postgres-test"
     networks:
       - quarkus-net
 
 networks:
   quarkus-net:
     driver: bridge
+    driver_opts:
+      com.docker.network.bridge.host_binding_ipv4: "127.0.0.1"
