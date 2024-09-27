@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  postgres_test:
+    image: postgres:14
+    container_name: postgres-test
+    environment:
+      POSTGRES_USER: quarkus
+      POSTGRES_PASSWORD: quarkus
+      POSTGRES_DB: qrkdb
+    ports:
+      - "5432:5432"
+    restart: always
+
+  quarkus_example:
+    image: quarkus-example
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres_test
+    stdin_open: true
+    tty: true
